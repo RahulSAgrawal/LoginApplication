@@ -52,7 +52,7 @@ public class ValidationLogic extends HttpServlet {
 	   ResultSet rs = ps.executeQuery();
 	   while(rs.next())
 	   {
-		   
+		   System.out.println("Print");
 	    String n = rs.getString(1);
 	    String p = rs.getString(2);
 	    
