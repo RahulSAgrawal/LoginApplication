@@ -25,7 +25,7 @@ public class Login extends HttpServlet {
         
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
-        
+        System.out.println("application");
         if(email==""&&pass==""){
         	out.println("Please Insert Username or Password ");
             RequestDispatcher rs = request.getRequestDispatcher("Index.html");
