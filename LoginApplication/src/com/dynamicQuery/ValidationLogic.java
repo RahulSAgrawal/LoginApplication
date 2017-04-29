@@ -18,6 +18,7 @@ import com.aartek.login.DBConnection;
 
 @WebServlet("/ValidationLogic")
 public class ValidationLogic extends HttpServlet {
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -32,14 +33,15 @@ public class ValidationLogic extends HttpServlet {
 	
 	Connection con=DBConnection.getconnections();
 	PreparedStatement ps;
-	
+	ResultSet rs ;
 	StringBuilder sqlBuilder = new StringBuilder();
 	String sqlquery;
 
 	
 	  try
 	  {
-	   if(name!=null)
+	   /*
+	    if(name!=null)
 	   {
 	    
 	  sqlBuilder.append("SELECT *")
@@ -49,7 +51,7 @@ public class ValidationLogic extends HttpServlet {
 	   
 	   ps=con.prepareStatement(sqlquery);
 	   ps.setString(1, name);
-	   ResultSet rs = ps.executeQuery();
+	   rs = ps.executeQuery();
 	   while(rs.next())
 	   {
 		   System.out.println("Print");
@@ -57,10 +59,67 @@ public class ValidationLogic extends HttpServlet {
 	    String p = rs.getString(2);
 	    
 	    System.out.println(" name is =  "+n);
-	    printWriter.println("name is  =  " +n + " and EmpID is  = "+p );
+	    printWriter.println("name is  =  " +n + "\n and EmpID is  = "+p );
 	   }
-	   
 	   }
+	   */
+//		 /* 
+		   if(name!= null && empId!= null)
+		   {
+		    
+		    System.out.println("in  try block");
+		    sqlBuilder.append("SELECT *")
+		    .append("FROM employee")
+		    .append(" WHERE name  = ?")
+		    .append("AND")
+		    .append(" empid  = ?");
+		    
+		    System.out.println("after builder try block");
+		    sqlquery = sqlBuilder.toString();
+		    ps = con.prepareStatement(sqlquery);
+		    System.out.println("after after sqlquery block");
+		    ps.setString(1, name);
+		    ps.setString(2, empId);
+		    rs = ps.executeQuery();
+		    while(rs.next())
+		    {
+		    	name = rs.getString(1);
+		    	empId = rs.getString(2);
+		      System.out.println(" name is =  "+name);
+		      printWriter.println("Name is  =  " +name + "\n and EmpID is  = "+empId );
+		    }
+		   }
+//		  */
+		  /*
+		  if(name!= null && empId!=null  && contNo!=null && address!=null){
+			  sqlBuilder.append("Select * ")
+			  .append("from employee")
+			  .append("where name = ?")
+			  .append(" AND ")
+			  .append("empid = ?")
+			  .append(" AND ")
+			  .append("contno = ? ")
+			  .append(" AND ")
+			  .append("address = ?");
+	 sqlquery = sqlBuilder.toString();
+	 ps=con.prepareStatement(sqlquery);
+	 ps.setString(1, name);
+	 ps.setString(2, empId);
+	 ps.setString(3, contNo);
+	 ps.setString(4, address);
+	 rs=ps.executeQuery();
+	while(rs.next()){
+		name=rs.getString(1);
+		empId=rs.getString(2);
+		contNo=rs.getString(3);
+		address=rs.getString(4);
+		System.out.println("Result");
+		printWriter.println("Result");
+		printWriter.println("Name\t "+name+"empID\t"+empId+"Contact No"+contNo+"Address"+address);
+			
+	}		 
+		  }*/
+		   
 	  }catch(Exception ex){
 		  ex.printStackTrace();
 	  }
